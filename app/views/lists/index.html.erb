@@ -1,0 +1,27 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://media.istockphoto.com/id/1271522601/fr/photo/pop-corn-et-sur-le-cin%C3%A9ma-fauteuil-rouge.jpg?s=612x612&w=0&k=20&c=wlivYtRe8L8xcDym-hTsQ-VXq0ylOVxI9RdaFTXmf5A=);">
+  <div class="container">
+    <h1>NETFLISTS</h1>
+    <p>Your movies' playlists.</p>
+  </div>
+</div>
+
+<div class="container">
+  <ul>
+    <div class="cards">
+    <% @lists.each do |list| %>
+    <li>
+    <%= link_to list_path(list) do%>
+    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://source.unsplash.com/random/?Cinema/)">
+    <%= list.name %>
+    </div>
+    <% end %>
+    </li>
+    <% end %>
+   <%= link_to new_list_path do%>
+  <div class="card-category">
+  <%= "+" %>
+  </div>
+  <% end %>
+  </div>
+   </ul>
+</div>
