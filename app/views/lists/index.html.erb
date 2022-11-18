@@ -17,11 +17,12 @@
     <% end %>
     </li>
     <% end %>
-   <%= link_to new_list_path do%>
   <div class="card-category">
-  <%= "+" %>
+  <%= simple_form_for(@list) do |f| %>
+  <%= f.input :name, :input_html => {class: 'new-movie'}%>
+  <%= f.submit %>
+<% end %>
   </div>
-  <% end %>
   </div>
    </ul>
 </div>
