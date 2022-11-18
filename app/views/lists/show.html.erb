@@ -1,17 +1,32 @@
+<div class="container">
 <h1><%= @list.name %></h1>
-
+<div class="d-flex justify-content-center mt-5 mb-5">
+<div class="card-form">
 <%= simple_form_for [@list, @bookmark] do |f| %>
   <%= f.input :comment %>
   <%= f.association :movie %>
   <%= f.button :submit, 'Add a movie' %>
 <% end %>
+</div>
+</div>
 
+<div class="cards">
 <p><% @list.bookmarks.each do |bookmark| %>
-<%= bookmark.movie.title %>
-<%= link_to "Delete",
-    bookmark_path(bookmark),
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-  %>
-  <% end %></p>
+<div class="card-movie">
+<%= image_tag(bookmark.movie.poster_url) %>
+  <div class="card-movie-infos">
+    <div>
+      <h2><%= bookmark.movie.title %></h2>
+      <p><%= bookmark.movie.overview %></p>
+    </div>
+    <h2 class="card-movie-rating"><%= bookmark.movie.rating %></h2>
+  <i class="fa-regular fa-star"></i>
+  </div>
 
-<%= link_to "Back home", lists_path %>
+<%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+<i class="fa-solid fa-circle-xmark"></i>
+<% end %>
+</div>
+  <% end %></p>
+</div>
+</div>
