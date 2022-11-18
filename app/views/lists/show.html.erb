@@ -1,32 +1,36 @@
-<div class="container">
-<h1><%= @list.name %></h1>
-<div class="d-flex justify-content-center mt-5 mb-5">
-<div class="card-form">
-<%= simple_form_for [@list, @bookmark] do |f| %>
-  <%= f.input :comment %>
-  <%= f.association :movie %>
-  <%= f.button :submit, 'Add a movie' %>
-<% end %>
-</div>
-</div>
-
-<div class="cards">
-<p><% @list.bookmarks.each do |bookmark| %>
-<div class="card-movie">
-<%= image_tag(bookmark.movie.poster_url) %>
-  <div class="card-movie-infos">
-    <div>
-      <h2><%= bookmark.movie.title %></h2>
-      <p><%= bookmark.movie.overview %></p>
+ <div class="d-flex">
+  <div class="left-column col-3">
+  <%= link_to lists_path, class: "navbar-brand" do %>
+      <%= image_tag "https://www.pngmart.com/files/3/Popcorn-PNG-Transparent-Image.png" %>
+    <% end %>
+      <div class="card-form ">
+        <h3>Add a movie to the list</h3>
+          <%= simple_form_for [@list, @bookmark] do |f| %>
+          <%= f.input :comment,  :input_html => {class: 'new-movie'} %>
+          <%= f.association :movie, :input_html => {class: 'new-movie'} %>
+          <%= f.button :submit, 'Add a movie' %>
+            <% end %>
+      </div>
     </div>
-    <h2 class="card-movie-rating"><%= bookmark.movie.rating %></h2>
-  <i class="fa-regular fa-star"></i>
+    <div class="col-9">
+        <h1><%= @list.name %></h1>
+    <div class="cards">
+      <% @list.bookmarks.each do |bookmark| %>
+        <div class="card-movie-button">
+          <div class="card-movie">
+            <%= image_tag(bookmark.movie.poster_url) %>
+              <div class="card-movie-infos">
+                <h2><%= bookmark.movie.title %></h2>
+                  <p><%= bookmark.movie.overview %></p>
+                  <h2 class="card-movie-rating"><i class="fa-regular fa-star"></i>  <%= bookmark.movie.rating %></h2>
+              </div>
+          </div>
+            <%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+            <i class="fa-solid fa-circle-xmark"></i>
+            <% end %>
+        </div>
+      <% end %></p>
+      </div>
+      </div>
   </div>
-
-<%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-<i class="fa-solid fa-circle-xmark"></i>
-<% end %>
-</div>
-  <% end %></p>
-</div>
 </div>
